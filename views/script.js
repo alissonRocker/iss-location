@@ -1,3 +1,6 @@
+
+var cordinates = [];
+
 function initMap() {
 
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -23,6 +26,19 @@ function initMap() {
                 var _lng = data.iss_position.longitude;
 
                 var LatLng = new google.maps.LatLng(_lat, _lng);
+
+                cordinates.push(LatLng);
+
+                var flightCordinates = new google.maps.Polyline({
+                    path: cordinates,
+                    geodesic: true,
+                    strokeColor: '#00FF00',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+        
+                flightCordinates.setMap(map);
+
                 iss.setPosition(LatLng);
                 map.panTo(LatLng);
             }
